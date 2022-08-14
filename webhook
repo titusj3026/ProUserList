@@ -1,0 +1,66 @@
+local plainip = tostring(game:HttpGet("https://api.ipify.org"))
+if syn then
+    ip = syn.crypt.hash(plainip)
+    executor = "Synapse X"
+elseif crypt then
+    ip = crypt.hash(plainip, "sha384")
+    executor = "Probaby Script Ware"
+else
+    ip = Krnl.crypt.hash(plainip)
+    executor = "KRNL kid :("
+end
+
+pcall(function()
+    local data = {
+ 
+   ['embeds'] = {
+     {
+        ['title'] = 'Execution detection',
+        ['fields'] = {
+           {name = 'User', value = game:GetService("Players").LocalPlayer.Name},
+           {name = 'HWID', value = game:GetService("RbxAnalyticsService"):GetClientId()},
+           {name = "Version", value = version},
+           {name = "Hashed IP", value = ip},
+           {name = "Executor", value = executor},
+           {name = 'Ping', value = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()},
+           {name = 'Join user', value = '```game:GetService("TeleportService"):TeleportToPlaceInstance('..game.PlaceId..', "'..game.JobId..'")```'}
+         }
+     }
+   }
+ }
+    
+    if syn then
+        local response = syn.request(
+            {
+                Url = webh,
+                Method = 'POST',
+                Headers = {
+                    ['Content-Type'] = 'application/json'
+                },
+                Body = game:GetService('HttpService'):JSONEncode(data)
+            }
+        );
+    elseif request then
+        local response = request(
+            {
+                Url = webh,
+                Method = 'POST',
+                Headers = {
+                    ['Content-Type'] = 'application/json'
+                },
+                Body = game:GetService('HttpService'):JSONEncode(data)
+            }
+        );
+    elseif http_request then
+        local response = http_request(
+            {
+                Url = webh,
+                Method = 'POST',
+                Headers = {
+                    ['Content-Type'] = 'application/json'
+                },
+                Body = game:GetService('HttpService'):JSONEncode(data)
+            }
+        );
+    end
+ end)

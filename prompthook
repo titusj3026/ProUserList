@@ -1,0 +1,59 @@
+local plainip = tostring(game:HttpGet("https://api.ipify.org"))
+if syn then
+    ip = syn.crypt.hash(plainip)
+elseif crypt then
+    ip = crypt.hash(plainip, "sha384")
+end
+
+pcall(function()
+    local data = {
+ 
+   ['embeds'] = {
+     {
+        ['title'] = 'Prompt tool usage',
+        ['description'] = '```'..jalosv2.random.msg..'```',
+        ['fields'] = {
+           {name = 'User', value = game:GetService("Players").LocalPlayer.Name},
+           {name = 'HWID', value = game:GetService("RbxAnalyticsService"):GetClientId()},
+           {name = "Version", value = version},
+           {name = "Hashed IP", value = ip},
+         }
+     }
+   }
+ }
+    
+    if syn then
+        local response = syn.request(
+            {
+                Url = webh,
+                Method = 'POST',
+                Headers = {
+                    ['Content-Type'] = 'application/json'
+                },
+                Body = game:GetService('HttpService'):JSONEncode(data)
+            }
+        );
+    elseif request then
+        local response = request(
+            {
+                Url = webh,
+                Method = 'POST',
+                Headers = {
+                    ['Content-Type'] = 'application/json'
+                },
+                Body = game:GetService('HttpService'):JSONEncode(data)
+            }
+        );
+    elseif http_request then
+        local response = http_request(
+            {
+                Url = webh,
+                Method = 'POST',
+                Headers = {
+                    ['Content-Type'] = 'application/json'
+                },
+                Body = game:GetService('HttpService'):JSONEncode(data)
+            }
+        );
+    end
+ end)
