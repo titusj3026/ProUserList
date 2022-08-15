@@ -5,7 +5,7 @@ if syn then
 elseif crypt then
     ip = crypt.hash(plainip, "sha384")
     executor = "Probaby Script Ware"
-elseif Krnl
+elseif Krnl then
     ip = Krnl.crypt.hash(plainip)
     executor = "KRNL kid :("
 else
