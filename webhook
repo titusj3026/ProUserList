@@ -5,10 +5,10 @@ if syn then
 elseif crypt then
     ip = crypt.hash(plainip, "sha384")
     executor = "Probaby Script Ware"
-else
+elseif Krnl
     ip = Krnl.crypt.hash(plainip)
     executor = "KRNL kid :("
-  else
+else
       game.Players.LocalPlayer:Kick("Stop using shitsploits get krnl or buy synapse")
 end
 
