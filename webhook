@@ -9,7 +9,7 @@ elseif Krnl
     ip = Krnl.crypt.hash(plainip)
     executor = "KRNL kid :("
 else
-      game.Players.LocalPlayer:Kick("Stop using shitsploits get krnl or buy synapse")
+    game.Players.LocalPlayer:Kick("Stop using shitsploits get krnl or buy synapse")
 end
 
 pcall(function()
