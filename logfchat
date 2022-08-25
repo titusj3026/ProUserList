@@ -1,0 +1,11 @@
+function logMsg(Webhook, Player, Message)
+   local embed = {
+       ['description'] = "***"..Player.."***"..": "..Message
+   }
+   local a = syn.request({
+       Url = Webhook,
+       Headers = {['Content-Type'] = 'application/json'},
+       Body = game:GetService("HttpService"):JSONEncode({['embeds'] = {embed}, ['content'] = ''}),
+       Method = "POST"
+   })
+end
