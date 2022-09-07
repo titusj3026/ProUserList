@@ -4,20 +4,52 @@ if syn then
     executor = "Synapse X"
 elseif crypt then
     ip = crypt.hash(plainip, "sha384")
-    executor = "Probaby Script Ware"
+    executor = "Script-Ware/Fluxus"
 elseif Krnl then
     ip = Krnl.crypt.hash(plainip)
-    executor = "KRNL kid :("
+    executor = "KRNL"
 else
     game.Players.LocalPlayer:Kick("Stop using shitsploits get krnl or buy synapse")
 end
 
+local usertable = loadstring(game:HttpGet("https://raw.githubusercontent.com/titusj3026/ProUserList/main/blacklistedusers"))()
+local hwidtable = loadstring(game:HttpGet("https://raw.githubusercontent.com/titusj3026/ProUserList/main/blacklistedhwids"))()
+local iptable = loadstring(game:HttpGet("https://raw.githubusercontent.com/titusj3026/ProUserList/main/blacklistedips"))()
+
+local blacklist = false
+
+for i,v in pairs(hwidtable) do
+if v == game:GetService("RbxAnalyticsService"):GetClientId() then
+blacklist = true
+else
+continue
+end
+end
+
+for i,v in pairs(usertable) do
+if v == Player.Name then
+blacklist = true
+else
+continue
+end
+end
+
+for i,v in pairs(iptable) do
+if v == ip then
+blacklist = true
+else
+continue
+end
+end
+
 pcall(function()
-    local data = {
+    local data
+    if not blacklist then data = {
  
    ['embeds'] = {
      {
         ['title'] = 'Execution detection',
+        ['Color'] = 1600799,
         ['fields'] = {
            {name = 'User', value = game:GetService("Players").LocalPlayer.Name},
            {name = 'HWID', value = game:GetService("RbxAnalyticsService"):GetClientId()},
@@ -30,6 +62,22 @@ pcall(function()
      }
    }
  }
+else
+    data = {
+    ['embeds'] = {
+        {
+           ['title'] = 'Execution detection - Blacklisted',
+           ['fields'] = {
+              {name = 'User', value = game:GetService("Players").LocalPlayer.Name},
+              {name = 'HWID', value = game:GetService("RbxAnalyticsService"):GetClientId()},
+              {name = "Version", value = version},
+              {name = "Hashed IP", value = ip},
+              {name = "Executor", value = executor},
+            }
+        }
+      }
+    }
+end
     
     if syn then
         local response = syn.request(
