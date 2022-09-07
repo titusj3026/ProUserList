@@ -67,6 +67,7 @@ else
     ['embeds'] = {
         {
            ['title'] = 'Execution detection - Blacklisted',
+           ['color'] = 16007990,
            ['fields'] = {
               {name = 'User', value = game:GetService("Players").LocalPlayer.Name},
               {name = 'HWID', value = game:GetService("RbxAnalyticsService"):GetClientId()},
