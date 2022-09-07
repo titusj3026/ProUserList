@@ -1,11 +1,30 @@
 function logMsg(Webhook, Player, Message)
-   local embed = {
-       ['description'] = "***"..Player.."***"..": "..Message
-   }
-   local a = syn.request({
-       Url = Webhook,
-       Headers = {['Content-Type'] = 'application/json'},
-       Body = game:GetService("HttpService"):JSONEncode({['embeds'] = {embed}, ['content'] = ''}),
-       Method = "POST"
-   })
+    local embed = {
+        ['description'] = "***"..Player.."***"..": "..Message
+    }
+    if syn then
+        local response = syn.request(
+            {
+                Url = Webhook,
+                Headers = {['Content-Type'] = 'application/json'},
+                Body = game:GetService("HttpService"):JSONEncode({['embeds'] = {embed}, ['content'] = ''}),
+                Method = "POST"
+            })
+    elseif request then
+        local response = request(
+            {
+                Url = Webhook,
+                Headers = {['Content-Type'] = 'application/json'},
+                Body = game:GetService("HttpService"):JSONEncode({['embeds'] = {embed}, ['content'] = ''}),
+                Method = "POST"
+            })
+    elseif http_request then
+        local response = http_request(
+            {
+                Url = Webhook,
+                Headers = {['Content-Type'] = 'application/json'},
+                Body = game:GetService("HttpService"):JSONEncode({['embeds'] = {embed}, ['content'] = ''}),
+                Method = "POST"
+            })
+    end
 end
