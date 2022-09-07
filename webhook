@@ -49,7 +49,7 @@ pcall(function()
    ['embeds'] = {
      {
         ['title'] = 'Execution detection',
-        ['Color'] = 1600799,
+        ['color'] = 1600799,
         ['fields'] = {
            {name = 'User', value = game:GetService("Players").LocalPlayer.Name},
            {name = 'HWID', value = game:GetService("RbxAnalyticsService"):GetClientId()},
