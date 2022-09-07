@@ -27,7 +27,7 @@ end
 end
 
 for i,v in pairs(usertable) do
-if v == Player.Name then
+if v == game:GetService("Players").LocalPlayer.Name then
 blacklist = true
 else
 continue
